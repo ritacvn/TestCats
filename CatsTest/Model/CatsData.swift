@@ -18,5 +18,20 @@ struct CatBreed: Codable {
     let name: String
     let temperament: String
     let origin: String
+    let lifeSpan: String?
+    let description: String?
+    let weight: CatWeight?
+
+    enum CodingKeys: String, CodingKey {
+        case id, name, temperament, origin
+        case lifeSpan = "life_span"
+        case description
+        case weight
+    }
 }
+
+struct CatWeight: Codable {
+    let metric: String
+}
+
 

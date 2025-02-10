@@ -8,12 +8,14 @@
 import Foundation
 
 class CatService {
-    private let baseURL = "https://api.thecatapi.com/v1/images/search?limit=10&has_breeds=1"
+    private let baseURL = "https://api.thecatapi.com/v1/images/search"
     private let apiKey = "live_NjrBZ64QSFdojA9axnoJF71FQoa2g1NFb1y8p3YL6rRKorzRklvlreoEXhXys8pW"
 
-    func fetchCatImages(completion: @escaping (Result<[CatImage], Error>) -> Void) {
-        guard let url = URL(string: baseURL) else {
-            completion(.failure(NSError(domain: "URL inválida", code: 400, userInfo: nil)))
+    func fetchCatImages(limit: Int, page: Int, completion: @escaping (Result<[CatImage], Error>) -> Void) {
+        let urlString = "\(baseURL)?limit=\(limit)&has_breeds=1&page=\(page)"
+        
+        guard let url = URL(string: urlString) else {
+            completion(.failure(NSError(domain: "Invalid URL", code: 400, userInfo: nil)))
             return
         }
 
