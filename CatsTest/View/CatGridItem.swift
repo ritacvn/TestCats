@@ -25,7 +25,7 @@ struct CatGridItem: View {
 
                 if let breed = cat.breeds?.first {
                     Text(breed.name)
-                        .font(.subheadline)
+                        .font(.title3)
                         .bold()
                         .foregroundColor(.primary)
                         .multilineTextAlignment(.center)
@@ -38,7 +38,7 @@ struct CatGridItem: View {
                         .padding(.horizontal, 8)
                         .background(
                             RoundedRectangle(cornerRadius: 8)
-                                .fill(Color.gray.opacity(0.3))
+                                .fill(Color.yellow.opacity(0.2))
                         )
                         .lineLimit(3)
                         .multilineTextAlignment(.center)

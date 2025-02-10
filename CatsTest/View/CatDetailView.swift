@@ -23,7 +23,7 @@ struct CatDetailView: View {
                                 RoundedRectangle(cornerRadius: 10)
                                     .stroke(Color.gray, lineWidth: 1.5)
                             )
-                            .shadow(color: Color.black.opacity(0.3), radius: 5, x: 0, y: 3)
+                            .shadow(color: Color.yellow.opacity(0.3), radius: 5, x: 0, y: 3)
                     } placeholder: {
                         ProgressView()
                             .frame(height: 300)
@@ -84,8 +84,8 @@ struct CatDetailView: View {
                     }
                     .padding()
                     .frame(maxWidth: .infinity)
-                    .background(Color.blue.opacity(0.2))
-                    .foregroundColor(.blue)
+                    .background(Color.yellow.opacity(0.2))
+                    .foregroundColor(.black)
                     .clipShape(RoundedRectangle(cornerRadius: 10))
                     .shadow(radius: 5)
                 }
