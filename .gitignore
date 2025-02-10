@@ -1,0 +1,9 @@
+# Ignore secret files
+CatsTest/Sources/Secrets.plist
+
+# Ignore Xcode files
+DerivedData/
+xcuserdata/
+
+*.xcworkspace
+*.DS_Store

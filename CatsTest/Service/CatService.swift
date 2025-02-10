@@ -9,7 +9,7 @@ import Foundation
 
 class CatService {
     private let baseURL = "https://api.thecatapi.com/v1/images/search"
-    private let apiKey = "live_NjrBZ64QSFdojA9axnoJF71FQoa2g1NFb1y8p3YL6rRKorzRklvlreoEXhXys8pW"
+    private let apiKey = SecretsManager.getAPIKey()
 
     func fetchCatImages(limit: Int, page: Int, completion: @escaping (Result<[CatImage], Error>) -> Void) {
         let urlString = "\(baseURL)?limit=\(limit)&has_breeds=1&page=\(page)"
@@ -20,7 +20,7 @@ class CatService {
         }
 
         var request = URLRequest(url: url)
-        request.addValue(apiKey, forHTTPHeaderField: "x-api-key")
+        request.addValue(apiKey ?? "", forHTTPHeaderField: "x-api-key")
 
         URLSession.shared.dataTask(with: request) { data, response, error in
             if let error = error {
