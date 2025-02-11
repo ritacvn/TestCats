@@ -66,6 +66,23 @@
 			);
 			target = 149144562D5979F3003C6F6D /* CatsTestUITests */;
 		};
+		14DF1E702D5C00A200E3BD1B /* Exceptions for "CatsTestTests" folder in "CatsTest" target */ = {
+			isa = PBXFileSystemSynchronizedBuildFileExceptionSet;
+			membershipExceptions = (
+				Service/CatAPITests.swift,
+				Service/CatServiceTests.swift,
+				ViewModel/CatViewModelTests.swift,
+			);
+			target = 1491443C2D5979F0003C6F6D /* CatsTest */;
+		};
+		14DF1E712D5C00CC00E3BD1B /* Exceptions for "CatsTestUITests" folder in "CatsTest" target */ = {
+			isa = PBXFileSystemSynchronizedBuildFileExceptionSet;
+			membershipExceptions = (
+				Detail/CatDetailViewTests.swift,
+				Feed/CatsFeedUITests.swift,
+			);
+			target = 1491443C2D5979F0003C6F6D /* CatsTest */;
+		};
 /* End PBXFileSystemSynchronizedBuildFileExceptionSet section */
 
 /* Begin PBXFileSystemSynchronizedRootGroup section */
@@ -80,6 +97,7 @@
 		149144A22D5AF869003C6F6D /* CatsTestTests */ = {
 			isa = PBXFileSystemSynchronizedRootGroup;
 			exceptions = (
+				14DF1E702D5C00A200E3BD1B /* Exceptions for "CatsTestTests" folder in "CatsTest" target */,
 				149144A52D5AF869003C6F6D /* Exceptions for "CatsTestTests" folder in "CatsTestTests" target */,
 			);
 			path = CatsTestTests;
@@ -88,6 +106,7 @@
 		14DF1E692D5BF68100E3BD1B /* CatsTestUITests */ = {
 			isa = PBXFileSystemSynchronizedRootGroup;
 			exceptions = (
+				14DF1E712D5C00CC00E3BD1B /* Exceptions for "CatsTestUITests" folder in "CatsTest" target */,
 				14DF1E6E2D5BF68200E3BD1B /* Exceptions for "CatsTestUITests" folder in "CatsTestUITests" target */,
 			);
 			path = CatsTestUITests;

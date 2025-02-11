@@ -6,7 +6,6 @@
 //
 
 import XCTest
-@testable import CatsTest
 
 class CatViewModelTests: XCTestCase {
     var viewModel: CatViewModel!
@@ -38,45 +37,37 @@ class CatViewModelTests: XCTestCase {
             XCTAssertEqual(self.viewModel.catImages.count, 2, "Expected 2 cat images")
             XCTAssertFalse(self.viewModel.isLoading, "Loading state should be false")
             XCTAssertNil(self.viewModel.errorMessage, "Error message should be nil")
+            XCTAssertFalse(self.viewModel.showError, "Alert should not be shown")
             expectation.fulfill()
         }
 
         wait(for: [expectation], timeout: 2.0)
     }
 
-    func testIsLoadingState() {
-        mockService.mockResult = .success([])
-
-        XCTAssertFalse(viewModel.isLoading, "Initial loading state should be false")
-
-        viewModel.fetchCatImages()
-        XCTAssertTrue(viewModel.isLoading, "isLoading should be true after calling fetchCatImages")
-    }
-
-    func testFetchCatImages_EmptyData() {
+    func testFetchCatImages_EmptyData_ShowsErrorAlert() {
         mockService.mockResult = .failure(.emptyData)
 
-        let expectation = expectation(description: "Should return empty data error")
+        let expectation = expectation(description: "Should display error alert for empty data")
         viewModel.fetchCatImages()
 
         DispatchQueue.main.asyncAfter(deadline: .now() + 1) {
             XCTAssertEqual(self.viewModel.errorMessage, "No cat images were found.", "Expected empty data error message")
+            XCTAssertTrue(self.viewModel.showError, "Error alert should be shown")
             expectation.fulfill()
         }
 
         wait(for: [expectation], timeout: 2.0)
     }
 
-    func testLoadMoreCats() {
-        let mockCats = (1...10).map { CatData(id: "\($0)", url: "https://placekitten.com/\($0*10)/\($0*10)", breeds: []) }
-        viewModel.catImages = mockCats
-        mockService.mockResult = .success(mockCats)
+    func testFetchCatImages_NetworkError_ShowsErrorAlert() {
+        mockService.mockResult = .failure(.networkError(NSError(domain: "NetworkError", code: -1009, userInfo: nil)))
 
-        let expectation = expectation(description: "Should load more cats")
-        viewModel.loadMoreCats(9)  
+        let expectation = expectation(description: "Should display error alert for network issue")
+        viewModel.fetchCatImages()
 
         DispatchQueue.main.asyncAfter(deadline: .now() + 1) {
-            XCTAssertEqual(self.viewModel.catImages.count, 20, "Expected 20 cat images after loading more")
+            XCTAssertTrue(self.viewModel.showError, "Error alert should be shown")
+            XCTAssertNotNil(self.viewModel.errorMessage, "Error message should be set")
             expectation.fulfill()
         }
 

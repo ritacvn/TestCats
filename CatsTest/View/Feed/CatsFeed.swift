@@ -25,6 +25,14 @@ struct CatsFeed: View {
             .background(Color(uiColor: .systemGray6))
             .navigationTitle("🐱 Cats Gallery")
             .onAppear { viewModel.loadInitialCats() }
+            .alert("Error", isPresented: $viewModel.showError) {
+                Button("Try Again", action: {
+                    viewModel.fetchCatImages()
+                })
+                Button("Cancel", role: .cancel, action: {}) 
+            } message: {
+                Text(viewModel.errorMessage ?? "An unexpected error occurred.")
+            }
         }
     }
 
@@ -39,7 +47,6 @@ struct CatsFeed: View {
         }
     }
 }
-
 struct LoadingIndicator: View {
     var body: some View {
         ProgressView("Loading...")

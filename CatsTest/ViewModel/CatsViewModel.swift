@@ -7,23 +7,25 @@
 
 import Foundation
 
-class CatViewModel: CatViewModelProtocol {
+class CatViewModel: ObservableObject {
     @Published var catImages: [CatData] = []
     @Published var isLoading: Bool = false
     @Published var errorMessage: String?
-    
+    @Published var showError: Bool = false 
+
     private let catService: CatServiceProtocol
-    
+
     init(catService: CatServiceProtocol = CatService()) {
         self.catService = catService
     }
-    
+
     func fetchCatImages(options: CatFetchOptions.Parameters = .default) {
         guard !isLoading else { return }
-        
+
         isLoading = true
         errorMessage = nil
-        
+        showError = false
+
         catService.fetchCatImages(options: options) { [weak self] result in
             DispatchQueue.main.async {
                 self?.isLoading = false
@@ -36,15 +38,12 @@ class CatViewModel: CatViewModelProtocol {
                     }
                 case .failure(let error):
                     self?.errorMessage = self?.handleError(error)
+                    self?.showError = true
                 }
             }
         }
     }
-    
-    func reloadCatImages() {
-        fetchCatImages(options: .default)
-    }
-    
+
     private func handleError(_ error: CatServiceError) -> String {
         switch error {
         case .invalidURL:
@@ -58,6 +57,7 @@ class CatViewModel: CatViewModelProtocol {
         }
     }
 }
+
 
 extension CatViewModel {
     func loadInitialCats() {
