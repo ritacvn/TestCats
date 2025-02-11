@@ -13,27 +13,28 @@ struct CatsFeed: View {
     var body: some View {
         NavigationView {
             ScrollView {
-                LazyVGrid(columns: [GridItem(.adaptive(minimum: 150))], spacing: 16) {
+                LazyVStack(spacing: 16) {
                     ForEach(viewModel.catImages.indices, id: \.self) { index in
                         let cat = viewModel.catImages[index]
                         NavigationLink(destination: CatDetailView(cat: cat)) {
-                            CatGridItem(cat: cat)
+                            CatsFeedItem(cat: cat)
+                                .padding(.horizontal)
                         }
                         .onAppear {
-                            if index == viewModel.catImages.count - 1 { 
+                            if index == viewModel.catImages.count - 1 {
                                 viewModel.fetchCatImages()
                             }
                         }
                     }
                 }
-                .padding()
+                .padding(.vertical)
                 
                 if viewModel.isLoading {
-                    ProgressView()
+                    ProgressView("Loading...")
                         .padding()
                 }
             }
-            .background(Color(uiColor: .systemGray6))
+            .background(Color(uiColor: .systemGray6)) 
             .navigationTitle("🐱 Cats Gallery")
             .task {
                 viewModel.fetchCatImages()
@@ -41,4 +42,3 @@ struct CatsFeed: View {
         }
     }
 }
-
