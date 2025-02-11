@@ -8,7 +8,7 @@
 import SwiftUI
 
 struct CatDetailView: View {
-    let cat: CatImage
+    let cat: CatData
 
     var body: some View {
         VStack {
@@ -46,12 +46,12 @@ struct CatDetailView: View {
 
                         HStack {
                             if let lifeSpan = breed.lifeSpan {
-                                InfoRow(label: "⏳ Life span",
+                                CatDetailInfoRow(label: "⏳ Life span",
                                         value: "\(lifeSpan) years")
                                 .accessibilityLabel("Life span: \(lifeSpan) years")
                             }
                             if let weight = breed.weight?.metric {
-                                InfoRow(label: "⚖️ Weight",
+                                CatDetailInfoRow(label: "⚖️ Weight",
                                         value: "\(weight) kg")
                                 .accessibilityLabel("Weight: \(weight) kg")
                             }

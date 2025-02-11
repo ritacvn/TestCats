@@ -7,22 +7,43 @@
 
 import Foundation
 
-class CatService {
-    private let baseURL = "https://api.thecatapi.com/v1/images/search"
-    private let apiKey = SecretsManager.getAPIKey()
+class CatService: CatServiceProtocol {
+    private let apiKey: String
+    private let session: URLSession
 
-    func fetchCatImages(limit: Int, page: Int, completion: @escaping (Result<[CatImage], Error>) -> Void) {
-        let urlString = "\(baseURL)?limit=\(limit)&has_breeds=1&page=\(page)"
-        
-        guard let url = URL(string: urlString) else {
+    init(apiKey: String = SecretsManager.getAPIKey() ?? "",
+         session: URLSession = .shared) {
+        self.apiKey = apiKey
+        self.session = session
+    }
+
+    func fetchCatImages(
+        limit: Int = 10,
+        page: Int = 0,
+        order: String = "RAND",
+        hasBreeds: Int = 1,
+        breedIDs: String? = nil,
+        categoryIDs: String? = nil,
+        subID: String? = nil,
+        completion: @escaping (Result<[CatData], Error>) -> Void
+    ) {
+        guard let url = CatAPI.getCatImagesURL(
+            limit: limit,
+            page: page,
+            order: order,
+            hasBreeds: hasBreeds,
+            breedIDs: breedIDs,
+            categoryIDs: categoryIDs,
+            subID: subID
+        ) else {
             completion(.failure(NSError(domain: "Invalid URL", code: 400, userInfo: nil)))
             return
         }
 
         var request = URLRequest(url: url)
-        request.addValue(apiKey ?? "", forHTTPHeaderField: "x-api-key")
+        request.addValue(apiKey, forHTTPHeaderField: "x-api-key")
 
-        URLSession.shared.dataTask(with: request) { data, response, error in
+        session.dataTask(with: request) { data, response, error in
             if let error = error {
                 completion(.failure(error))
                 return
@@ -34,7 +55,7 @@ class CatService {
             }
 
             do {
-                let decodedCats = try JSONDecoder().decode([CatImage].self, from: data)
+                let decodedCats = try JSONDecoder().decode([CatData].self, from: data)
                 completion(.success(decodedCats))
             } catch {
                 completion(.failure(error))

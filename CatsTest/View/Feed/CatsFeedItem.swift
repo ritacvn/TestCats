@@ -7,7 +7,7 @@
 import SwiftUI
 
 struct CatsFeedItem: View {
-    let cat: CatImage
+    let cat: CatData
 
     var body: some View {
         VStack {

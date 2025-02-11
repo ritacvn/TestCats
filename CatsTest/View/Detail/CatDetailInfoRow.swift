@@ -8,7 +8,7 @@
 import Foundation
 import SwiftUI
 
-struct InfoRow: View {
+struct CatDetailInfoRow: View {
     let label: String
     let value: String
 

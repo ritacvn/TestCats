@@ -8,28 +8,37 @@
 import Foundation
 
 class CatViewModel: ObservableObject {
-    @Published var catImages: [CatImage] = []
-    @Published var isLoading: Bool = false
-    @Published var errorMessage: String?
-    
-    private let catService = CatService()
-    private var page = 1
-    private let limit = 10
-    
-    func fetchCatImages() {
-        guard !isLoading else { return }
-        isLoading = true
-        errorMessage = nil
-        
-        catService.fetchCatImages(limit: limit, page: page) { [weak self] result in
+    @Published var catImages: [CatData] = []
+    private let catService: CatServiceProtocol
+
+    init(catService: CatServiceProtocol = CatService()) {
+        self.catService = catService
+    }
+
+    func fetchCatImages(
+        limit: Int = 10,
+        page: Int = 0,
+        order: String = "RAND",
+        hasBreeds: Int = 1,
+        breedIDs: String? = nil,
+        categoryIDs: String? = nil,
+        subID: String? = nil
+    ) {
+        catService.fetchCatImages(
+            limit: limit,
+            page: page,
+            order: order,
+            hasBreeds: hasBreeds,
+            breedIDs: breedIDs,
+            categoryIDs: categoryIDs,
+            subID: subID
+        ) { [weak self] result in
             DispatchQueue.main.async {
-                self?.isLoading = false
                 switch result {
                 case .success(let cats):
                     self?.catImages.append(contentsOf: cats)
-                    self?.page += 1
                 case .failure(let error):
-                    self?.errorMessage = "Error loading cats: \(error.localizedDescription)"
+                    print("Error loading cats: \(error.localizedDescription)")
                 }
             }
         }

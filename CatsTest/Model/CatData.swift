@@ -7,7 +7,7 @@
 
 import Foundation
 
-struct CatImage: Codable, Identifiable {
+struct CatData: Codable, Identifiable {
     let id: String
     let url: String
     let breeds: [CatBreed]?

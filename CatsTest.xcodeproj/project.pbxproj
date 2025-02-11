@@ -29,20 +29,46 @@
 		149144572D5979F3003C6F6D /* CatsTestUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = CatsTestUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
 
+/* Begin PBXFileSystemSynchronizedBuildFileExceptionSet section */
+		149144A42D5AF869003C6F6D /* Exceptions for "CatsTestTests" folder in "CatsTest" target */ = {
+			isa = PBXFileSystemSynchronizedBuildFileExceptionSet;
+			membershipExceptions = (
+				CatsTestTests.swift,
+			);
+			target = 1491443C2D5979F0003C6F6D /* CatsTest */;
+		};
+		149144A52D5AF869003C6F6D /* Exceptions for "CatsTestTests" folder in "CatsTestTests" target */ = {
+			isa = PBXFileSystemSynchronizedBuildFileExceptionSet;
+			membershipExceptions = (
+				CatsTestTests.swift,
+			);
+			target = 1491444C2D5979F3003C6F6D /* CatsTestTests */;
+		};
+/* End PBXFileSystemSynchronizedBuildFileExceptionSet section */
+
 /* Begin PBXFileSystemSynchronizedRootGroup section */
 		1491443F2D5979F0003C6F6D /* CatsTest */ = {
 			isa = PBXFileSystemSynchronizedRootGroup;
 			path = CatsTest;
 			sourceTree = "<group>";
 		};
-		149144502D5979F3003C6F6D /* CatsTestTests */ = {
-			isa = PBXFileSystemSynchronizedRootGroup;
-			path = CatsTestTests;
-			sourceTree = "<group>";
-		};
 		1491445A2D5979F3003C6F6D /* CatsTestUITests */ = {
 			isa = PBXFileSystemSynchronizedRootGroup;
 			path = CatsTestUITests;
+			sourceTree = "<group>";
+		};
+		149144992D5AF860003C6F6D /* New Folder */ = {
+			isa = PBXFileSystemSynchronizedRootGroup;
+			path = "New Folder";
+			sourceTree = "<group>";
+		};
+		149144A22D5AF869003C6F6D /* CatsTestTests */ = {
+			isa = PBXFileSystemSynchronizedRootGroup;
+			exceptions = (
+				149144A42D5AF869003C6F6D /* Exceptions for "CatsTestTests" folder in "CatsTest" target */,
+				149144A52D5AF869003C6F6D /* Exceptions for "CatsTestTests" folder in "CatsTestTests" target */,
+			);
+			path = CatsTestTests;
 			sourceTree = "<group>";
 		};
 /* End PBXFileSystemSynchronizedRootGroup section */
@@ -76,7 +102,8 @@
 			isa = PBXGroup;
 			children = (
 				1491443F2D5979F0003C6F6D /* CatsTest */,
-				149144502D5979F3003C6F6D /* CatsTestTests */,
+				149144A22D5AF869003C6F6D /* CatsTestTests */,
+				149144992D5AF860003C6F6D /* New Folder */,
 				1491445A2D5979F3003C6F6D /* CatsTestUITests */,
 				1491443E2D5979F0003C6F6D /* Products */,
 			);
@@ -109,6 +136,8 @@
 			);
 			fileSystemSynchronizedGroups = (
 				1491443F2D5979F0003C6F6D /* CatsTest */,
+				149144992D5AF860003C6F6D /* New Folder */,
+				149144A22D5AF869003C6F6D /* CatsTestTests */,
 			);
 			name = CatsTest;
 			packageProductDependencies = (
@@ -129,9 +158,6 @@
 			);
 			dependencies = (
 				1491444F2D5979F3003C6F6D /* PBXTargetDependency */,
-			);
-			fileSystemSynchronizedGroups = (
-				149144502D5979F3003C6F6D /* CatsTestTests */,
 			);
 			name = CatsTestTests;
 			packageProductDependencies = (

@@ -29,7 +29,7 @@ struct CatsFeed: View {
                 }
                 .padding(.vertical)
                 
-                if viewModel.isLoading {
+                if viewModel.catImages.isEmpty {
                     ProgressView("Loading...")
                         .padding()
                 }
