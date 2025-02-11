@@ -7,8 +7,6 @@
 
 import SwiftUI
 
-import SwiftUI
-
 struct CatsFeed: View {
     @StateObject private var viewModel = CatViewModel()
 
@@ -45,6 +43,7 @@ struct CatsFeed: View {
 struct LoadingIndicator: View {
     var body: some View {
         ProgressView("Loading...")
+            .accessibilityIdentifier("Loading") 
             .padding()
     }
 }

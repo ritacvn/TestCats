@@ -30,7 +30,7 @@ struct CatDetailView: View {
                             .frame(height: 300)
                             .accessibilityLabel("Loading cat image")
                     }
-
+        
                     if let breed = cat.breeds?.first {
                         Text("🌍 \(breed.origin)")
                             .font(.subheadline)
@@ -49,11 +49,13 @@ struct CatDetailView: View {
                                 CatDetailInfoRow(label: "⏳ Life span",
                                         value: "\(lifeSpan) years")
                                 .accessibilityLabel("Life span: \(lifeSpan) years")
+                                .accessibilityIdentifier("LifeSpan")
                             }
                             if let weight = breed.weight?.metric {
                                 CatDetailInfoRow(label: "⚖️ Weight",
                                         value: "\(weight) kg")
                                 .accessibilityLabel("Weight: \(weight) kg")
+                                .accessibilityIdentifier("Weight")
                             }
                         }
                         .padding(.top, 10)
@@ -63,6 +65,7 @@ struct CatDetailView: View {
                             .bold()
                             .padding(.top, 10)
                             .frame(maxWidth: .infinity, alignment: .center)
+                            .accessibilityIdentifier("About")
 
                         if let description = breed.description {
                             Text(description)
@@ -94,9 +97,11 @@ struct CatDetailView: View {
                     .foregroundColor(.black)
                     .clipShape(RoundedRectangle(cornerRadius: 10))
                     .shadow(radius: 5)
+                    .accessibilityIdentifier("WikipediaButton")
                 }
                 .padding()
             }
+
         }
         .background(Color(uiColor: .systemGray6))
         .navigationTitle(cat.breeds?.first?.name ?? "Cat details")
