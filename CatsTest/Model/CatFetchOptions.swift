@@ -25,7 +25,6 @@ enum CatFetchOptions {
 
         static let `default` = Parameters()
 
-        /// ✅ Agora o init tem valores padrão para evitar o erro
         init(
             limit: Int = 10,
             page: Int = 0,

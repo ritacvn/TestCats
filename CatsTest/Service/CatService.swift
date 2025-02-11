@@ -7,13 +7,6 @@
 
 import Foundation
 
-enum CatServiceError: Error {
-    case invalidURL
-    case emptyData
-    case decodingError(Error)
-    case networkError(Error)
-}
-
 class CatService: CatServiceProtocol {
     private let apiKey: String
     private let session: URLSessionProtocol

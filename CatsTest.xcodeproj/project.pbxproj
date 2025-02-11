@@ -33,17 +33,40 @@
 		149144A42D5AF869003C6F6D /* Exceptions for "CatsTestTests" folder in "CatsTest" target */ = {
 			isa = PBXFileSystemSynchronizedBuildFileExceptionSet;
 			membershipExceptions = (
-				CatsTestTests.swift,
+				Mock/CatServiceMock.swift,
+				Mock/CatViewModelMock.swift,
+				Mock/URLSessionMock.swift,
 				Service/CatAPITests.swift,
+				Service/CatServiceTests.swift,
+				ViewModel/CatViewModelTests.swift,
 			);
 			target = 1491443C2D5979F0003C6F6D /* CatsTest */;
 		};
 		149144A52D5AF869003C6F6D /* Exceptions for "CatsTestTests" folder in "CatsTestTests" target */ = {
 			isa = PBXFileSystemSynchronizedBuildFileExceptionSet;
 			membershipExceptions = (
-				CatsTestTests.swift,
+				Mock/CatServiceMock.swift,
+				Mock/CatViewModelMock.swift,
+				Mock/URLSessionMock.swift,
 				Service/CatAPITests.swift,
-				ViewModel/CatViewModelMock.swift,
+				Service/CatServiceTests.swift,
+				ViewModel/CatViewModelTests.swift,
+			);
+			target = 1491444C2D5979F3003C6F6D /* CatsTestTests */;
+		};
+		149144DA2D5BA6ED003C6F6D /* Exceptions for "CatsTest" folder in "CatsTestTests" target */ = {
+			isa = PBXFileSystemSynchronizedBuildFileExceptionSet;
+			membershipExceptions = (
+				Model/CatData.swift,
+				Model/CatFetchOptions.swift,
+				Service/CatAPI.swift,
+				Service/CatService.swift,
+				Service/CatServiceError.swift,
+				Service/CatServiceProtocol.swift,
+				Service/URLSessionProtocol.swift,
+				Sources/SecretsManager.swift,
+				ViewModel/CatsViewModel.swift,
+				ViewModel/CatsViewModelProtocol.swift,
 			);
 			target = 1491444C2D5979F3003C6F6D /* CatsTestTests */;
 		};
@@ -52,6 +75,9 @@
 /* Begin PBXFileSystemSynchronizedRootGroup section */
 		1491443F2D5979F0003C6F6D /* CatsTest */ = {
 			isa = PBXFileSystemSynchronizedRootGroup;
+			exceptions = (
+				149144DA2D5BA6ED003C6F6D /* Exceptions for "CatsTest" folder in "CatsTestTests" target */,
+			);
 			path = CatsTest;
 			sourceTree = "<group>";
 		};
