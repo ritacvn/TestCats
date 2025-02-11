@@ -7,6 +7,8 @@
 
 import SwiftUI
 
+import SwiftUI
+
 struct CatsFeed: View {
     @StateObject private var viewModel = CatViewModel()
 
@@ -14,31 +16,35 @@ struct CatsFeed: View {
         NavigationView {
             ScrollView {
                 LazyVStack(spacing: 16) {
-                    ForEach(viewModel.catImages.indices, id: \.self) { index in
-                        let cat = viewModel.catImages[index]
-                        NavigationLink(destination: CatDetailView(cat: cat)) {
-                            CatsFeedItem(cat: cat)
-                                .padding(.horizontal)
-                        }
-                        .onAppear {
-                            if index == viewModel.catImages.count - 1 {
-                                viewModel.fetchCatImages()
-                            }
-                        }
+                    catList
+
+                    if viewModel.isLoading && !viewModel.catImages.isEmpty {
+                        LoadingIndicator()
                     }
                 }
                 .padding(.vertical)
-                
-                if viewModel.catImages.isEmpty {
-                    ProgressView("Loading...")
-                        .padding()
-                }
             }
-            .background(Color(uiColor: .systemGray6)) 
+            .background(Color(uiColor: .systemGray6))
             .navigationTitle("🐱 Cats Gallery")
-            .task {
-                viewModel.fetchCatImages()
-            }
+            .onAppear { viewModel.loadInitialCats() }
         }
+    }
+
+    private var catList: some View {
+        ForEach(viewModel.catImages.indices, id: \.self) { index in
+            let cat = viewModel.catImages[index]
+            NavigationLink(destination: CatDetailView(cat: cat)) {
+                CatsFeedItem(cat: cat)
+                    .padding(.horizontal)
+            }
+            .onAppear { viewModel.loadMoreCats(index) }
+        }
+    }
+}
+
+struct LoadingIndicator: View {
+    var body: some View {
+        ProgressView("Loading...")
+            .padding()
     }
 }

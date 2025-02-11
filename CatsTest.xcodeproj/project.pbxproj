@@ -34,6 +34,7 @@
 			isa = PBXFileSystemSynchronizedBuildFileExceptionSet;
 			membershipExceptions = (
 				CatsTestTests.swift,
+				Service/CatAPITests.swift,
 			);
 			target = 1491443C2D5979F0003C6F6D /* CatsTest */;
 		};
@@ -41,6 +42,8 @@
 			isa = PBXFileSystemSynchronizedBuildFileExceptionSet;
 			membershipExceptions = (
 				CatsTestTests.swift,
+				Service/CatAPITests.swift,
+				ViewModel/CatViewModelMock.swift,
 			);
 			target = 1491444C2D5979F3003C6F6D /* CatsTestTests */;
 		};
@@ -55,11 +58,6 @@
 		1491445A2D5979F3003C6F6D /* CatsTestUITests */ = {
 			isa = PBXFileSystemSynchronizedRootGroup;
 			path = CatsTestUITests;
-			sourceTree = "<group>";
-		};
-		149144992D5AF860003C6F6D /* New Folder */ = {
-			isa = PBXFileSystemSynchronizedRootGroup;
-			path = "New Folder";
 			sourceTree = "<group>";
 		};
 		149144A22D5AF869003C6F6D /* CatsTestTests */ = {
@@ -103,7 +101,6 @@
 			children = (
 				1491443F2D5979F0003C6F6D /* CatsTest */,
 				149144A22D5AF869003C6F6D /* CatsTestTests */,
-				149144992D5AF860003C6F6D /* New Folder */,
 				1491445A2D5979F3003C6F6D /* CatsTestUITests */,
 				1491443E2D5979F0003C6F6D /* Products */,
 			);
@@ -136,7 +133,6 @@
 			);
 			fileSystemSynchronizedGroups = (
 				1491443F2D5979F0003C6F6D /* CatsTest */,
-				149144992D5AF860003C6F6D /* New Folder */,
 				149144A22D5AF869003C6F6D /* CatsTestTests */,
 			);
 			name = CatsTest;

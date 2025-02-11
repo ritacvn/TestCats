@@ -9,13 +9,7 @@ import Foundation
 
 protocol CatServiceProtocol {
     func fetchCatImages(
-        limit: Int,
-        page: Int,
-        order: String,
-        hasBreeds: Int,
-        breedIDs: String?,
-        categoryIDs: String?,
-        subID: String?,
-        completion: @escaping (Result<[CatData], Error>) -> Void
+        options: CatFetchOptions.Parameters,
+        completion: @escaping (Result<[CatData], CatServiceError>) -> Void
     )
 }

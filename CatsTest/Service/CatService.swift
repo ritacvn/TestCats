@@ -7,50 +7,50 @@
 
 import Foundation
 
+enum CatServiceError: Error {
+    case invalidURL
+    case emptyData
+    case decodingError(Error)
+    case networkError(Error)
+}
+
 class CatService: CatServiceProtocol {
     private let apiKey: String
-    private let session: URLSession
+    private let session: URLSessionProtocol
 
     init(apiKey: String = SecretsManager.getAPIKey() ?? "",
-         session: URLSession = .shared) {
+         session: URLSessionProtocol = URLSession.shared) {
         self.apiKey = apiKey
         self.session = session
     }
 
     func fetchCatImages(
-        limit: Int = 10,
-        page: Int = 0,
-        order: String = "RAND",
-        hasBreeds: Int = 1,
-        breedIDs: String? = nil,
-        categoryIDs: String? = nil,
-        subID: String? = nil,
-        completion: @escaping (Result<[CatData], Error>) -> Void
+        options: CatFetchOptions.Parameters = .default,
+        completion: @escaping (Result<[CatData], CatServiceError>) -> Void
     ) {
         guard let url = CatAPI.getCatImagesURL(
-            limit: limit,
-            page: page,
-            order: order,
-            hasBreeds: hasBreeds,
-            breedIDs: breedIDs,
-            categoryIDs: categoryIDs,
-            subID: subID
+            limit: options.limit,
+            page: options.page,
+            order: options.order.rawValue,
+            hasBreeds: options.hasBreeds,
+            breedIDs: options.breedIDs,
+            categoryIDs: options.categoryIDs,
+            subID: options.subID
         ) else {
-            completion(.failure(NSError(domain: "Invalid URL", code: 400, userInfo: nil)))
+            completion(.failure(.invalidURL))
             return
         }
 
-        var request = URLRequest(url: url)
-        request.addValue(apiKey, forHTTPHeaderField: "x-api-key")
+        let request = createRequest(url: url)
 
         session.dataTask(with: request) { data, response, error in
             if let error = error {
-                completion(.failure(error))
+                completion(.failure(.networkError(error)))
                 return
             }
 
             guard let data = data else {
-                completion(.failure(NSError(domain: "Empty data", code: 204, userInfo: nil)))
+                completion(.failure(.emptyData))
                 return
             }
 
@@ -58,8 +58,15 @@ class CatService: CatServiceProtocol {
                 let decodedCats = try JSONDecoder().decode([CatData].self, from: data)
                 completion(.success(decodedCats))
             } catch {
-                completion(.failure(error))
+                completion(.failure(.decodingError(error)))
             }
         }.resume()
+    }
+
+
+    private func createRequest(url: URL) -> URLRequest {
+        var request = URLRequest(url: url)
+        request.addValue(apiKey, forHTTPHeaderField: "x-api-key")
+        return request
     }
 }
