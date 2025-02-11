@@ -18,9 +18,11 @@ struct CatGridItem: View {
                         .scaledToFill()
                         .frame(width: 150, height: 150)
                         .clipShape(RoundedRectangle(cornerRadius: 10))
+                        .accessibilityLabel("Image of a cat")
                 } placeholder: {
                     ProgressView()
                         .frame(width: 150, height: 150)
+                        .accessibilityLabel("Loading an image of a cat")
                 }
 
                 if let breed = cat.breeds?.first {
@@ -30,6 +32,7 @@ struct CatGridItem: View {
                         .foregroundColor(.primary)
                         .multilineTextAlignment(.center)
                         .padding(.top, 5)
+                        .accessibilityLabel("Breed: \(breed.name)")
 
                     Text(breed.temperament)
                         .font(.footnote)
@@ -44,16 +47,19 @@ struct CatGridItem: View {
                         .multilineTextAlignment(.center)
                         .frame(maxWidth: 140)
                         .padding(.top, 2)
+                        .accessibilityLabel("Temperament: \(breed.temperament)")
                 } else {
                     Text("No breed info")
                         .font(.subheadline)
                         .foregroundColor(.secondary)
+                        .accessibilityLabel("Unknown breed")
                 }
             }
             .padding()
             .background(Color.white)
             .clipShape(RoundedRectangle(cornerRadius: 12))
             .shadow(color: Color.black.opacity(0.2), radius: 5, x: 0, y: 3)
+            .accessibilityElement(children: .combine)
         }
     }
 }
