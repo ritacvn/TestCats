@@ -61,6 +61,31 @@ class SecretsManager {
 - Click Run ▶️ or press Cmd + R.
 
 ---
+
+## 🧪 Testing
+### ✅ Unit Tests
+Run unit tests using:
+
+```bash
+Cmd + U
+```
+Or via Xcode:
+1. Select CatsTestTests.
+2. Run the tests (Cmd + U).
+   
+Main tests include:
+
+* CatServiceTests: Tests API requests.
+* CatViewModelTests: Tests ViewModel logic.
+
+### 🖥️ UI Tests
+Select CatsTestUITests.
+Run UI tests.
+Examples of UI tests:
+
+* testFeedScreenLoads(): Checks if the home screen loads correctly.
+* testNavigationToDetailScreen(): Tests navigation to the cat detail screen.
+---
 ## 👤 Author
 Rita Vasconcelos.
 
