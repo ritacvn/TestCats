@@ -20,7 +20,7 @@ class CatAPITests: XCTestCase {
     }
     
     func test_CatAPI_getCatImagesURL_WithParameters() {
-        let url = CatAPI.getCatImagesURL(limit: 5, page: 2, order: "ASC", hasBreeds: 0, breedIDs: "beng,abys", categoryIDs: "1,5,14")
+        let url = CatAPI.getCatImagesURL(options: CatFetchOptions.Parameters(limit: 5, page: 2, order: CatFetchOptions.Order(rawValue: "ASC") ?? .random, hasBreeds: 0, breedIDs: "beng,abys", categoryIDs: "1,5,14"))
         XCTAssertNotNil(url)
         XCTAssertEqual(url?.absoluteString.contains("limit=5"), true)
         XCTAssertEqual(url?.absoluteString.contains("page=2"), true)

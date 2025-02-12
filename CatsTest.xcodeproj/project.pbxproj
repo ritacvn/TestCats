@@ -47,6 +47,7 @@
 			membershipExceptions = (
 				Model/CatData.swift,
 				Model/CatFetchOptions.swift,
+				Service/APIConfig.swift,
 				Service/CatAPI.swift,
 				Service/CatService.swift,
 				Service/CatServiceError.swift,

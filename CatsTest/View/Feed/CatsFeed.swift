@@ -15,10 +15,13 @@ struct CatsFeed: View {
             ScrollView {
                 LazyVStack(spacing: 16) {
                     catList
-
-                    if viewModel.isLoading && !viewModel.catImages.isEmpty {
+                    if viewModel.isLoading {
                         LoadingIndicator()
+                    } else if viewModel.catImages.isEmpty {
+                        Text("No cats available")
+                            .foregroundColor(.gray)
                     }
+
                 }
                 .padding(.vertical)
             }

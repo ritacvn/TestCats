@@ -21,15 +21,7 @@ class CatService: CatServiceProtocol {
         options: CatFetchOptions.Parameters = .default,
         completion: @escaping (Result<[CatData], CatServiceError>) -> Void
     ) {
-        guard let url = CatAPI.getCatImagesURL(
-            limit: options.limit,
-            page: options.page,
-            order: options.order.rawValue,
-            hasBreeds: options.hasBreeds,
-            breedIDs: options.breedIDs,
-            categoryIDs: options.categoryIDs,
-            subID: options.subID
-        ) else {
+        guard let url = CatAPI.getCatImagesURL(options: options) else {
             completion(.failure(.invalidURL))
             return
         }
@@ -56,10 +48,9 @@ class CatService: CatServiceProtocol {
         }.resume()
     }
 
-
     private func createRequest(url: URL) -> URLRequest {
         var request = URLRequest(url: url)
-        request.addValue(apiKey, forHTTPHeaderField: "x-api-key")
+        request.addValue(apiKey, forHTTPHeaderField: APIConfig.apiKeyHeaderField)
         return request
     }
 }
