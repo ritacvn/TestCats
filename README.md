@@ -20,8 +20,7 @@ This project was developed using **SwiftUI**, following best practices for archi
 ---
 
 ## 📂 Project Architecture
-This project follows the **MVVM architecture**, with well-structured components:
-
+- MVVM architecture
 
 ---
 
