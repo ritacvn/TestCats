@@ -40,6 +40,8 @@ git clone https://github.com/your-username/CatsTest.git
 cd CatsTest
 open CatsTest.xcodeproj
 ````
+> 💡 **If you have the ZIP folder, you can skip the Git clone step.**
+
 ---
 
 ## 🔑 API Key Configuration
